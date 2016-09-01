@@ -17,6 +17,7 @@ router.param('id', function (req, res, next, id) {
 });
 
 router.get('/', function (req, res, next) {
+   console.log(req.session);
   User.findAll({})
   .then(function (users) {
     res.json(users);
@@ -25,6 +26,7 @@ router.get('/', function (req, res, next) {
 });
 
 router.post('/', function (req, res, next) {
+
   User.create(req.body)
   .then(function (user) {
     res.status(201).json(user);
@@ -49,6 +51,7 @@ router.put('/:id', function (req, res, next) {
 });
 
 router.delete('/:id', function (req, res, next) {
+  console.log(req.session);
   req.requestedUser.destroy()
   .then(function () {
     res.status(204).end();
